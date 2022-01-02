@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
+:root {
+    --primary: #8A0095;
+    --secondary: #2126C0;
+    --completed: #57A141;
+    --completed2: #7478E7;
+}
+body {
+    display:flex;
+    justify-content: center;
+    background: linear-gradient(45deg, var(--secondary) 0%, rgba(88,22,179,1) 70%, rgba(138,0,149,1) 100%);
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    font-weight:300;
+    padding: 0;
+    margin: 0;
+    min-height:100vh;
+}
+.wrapper {
+    background-color: white;
+    margin: 0 1em;
+    padding: 1em 2em 2em;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px #0f1257;
+    box-sizing: border-box;
+    max-width: 600px;
+    width: calc(100% - 20px);
+    height:50%;
+    margin: 3em auto;
+}
+form{
+    display: flex;
+    gap: 12px;
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+input.todoinput,
+input[type="date"]
+ {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1), 0 -4px 10px rgba(0,0,0,0.1);
+    border: 1px transparent solid;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: 4px;
+    height: 40px;
+}
+input.todoinput.text,
+input[type="date"] {
+    flex-basis:100%;
+}
+
+.filterresults {
+    display:flex;
+    justify-content: flex-start;
+}
+.filterresults > span {
+    padding-left:4px;
+    padding-right:12px;
+}
+input#filterbytext {
+    width: 100%;
+}
+ul {
+    list-style:none;
+    padding-left:0;
+}
+li[class^="todo"] {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    column-gap: 6px;
+    margin: 1em 0;
+    padding: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    transition: all 300ms ease-in-out;
+}
+li[class^="todo"]:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+.todotext {
+    flex: 1 0 60%;
+    border:1px solid transparent;
+    border-radius: 4px;
+    display:block;
+    margin-top: -6px;
+    padding: 4px 2px;
+    transition:width 1s ease-in-out;
+}
+.todotext::before{
+    content:'';
+    display:block;
+    width: 0;
+    height: 2px;
+    position: relative;
+    border-bottom: 2px solid transparent;
+    top: 11px;
+    transition:all 1s ease-in-out; 
+}
+.todotext.todo--done {
+   color: #bbb;
+   margin-right: 8px;   
+   transition:width 1s ease-in-out;
+}
+.todotext.todo--done::before{
+    border-bottom: 2px solid var(--secondary);
+    width: 100%;
+    animation-fill-mode: forwards; 
+}
+.todotext.edit {
+    border: 1px #aaa solid;
+}
+span.todo--date {
+    font-size: 14px;
+    color: #888;
+}
+button, 
+.todo-status {
+    border:1px solid transparent;
+    border-radius: 8px;
+    padding:4px 8px;
+    margin: 0;
+    transition: all 300ms ease-in-out;
+}
+button[class^="todo-"],
+.todo-status {
+    font-size: 14px;
+    padding:0;
+    flex-basis: 32px;
+    justify-items: flex-end;
+}
+.todo-status.complete {
+    color:var(--completed2);
+}
+@keyframes stroke {
+    from {width:0}
+    to {width:100%}
+}
+.check {
+    background-color:transparent;
+    color: transparent;
+    width: 24px;
+    height:24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.125), 0 -4px 10px rgba(0,0,0,0.125);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 500ms ease-in-out;
+}
+.check.complete {
+    background-color:var(--secondary);
+}
+button:hover,
+.check {
+    cursor: pointer;
+}
+.check:hover {
+    transform:translateY(-2px)
+}
+.check::before {
+    content: '';
+    background-color: transparent;
+    position: relative;
+    top:0;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    visibility: hidden;
+    display: block;
+    border-radius: 8px;
+    padding-top: 0;
+    transform:translateY(100%);
+    transition: all 250ms ease-in-out;
+}
+.check:hover::before {
+    background-color: var(--secondary);
+    opacity: 1;
+    visibility: visible;
+    display: block;
+    padding-top: 100%;
+    transform:translateY(0)
+}
+.check.complete::before {
+    content: '';
+    background-color: transparent;
+    position: relative;
+    bottom:0;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    visibility: hidden;
+    display: block;
+    border-radius: 8px;
+    padding-top: 0;
+    transform:translateY(-100%);
+    transition: all 250ms ease-in-out;
+}
+.check.complete:hover::before {
+    background-color: var(--completed2);
+    opacity: 1;
+    visibility: visible;
+    display: block;
+    padding-top: 100%;
+    transform:translateY(0)
+}
+button.todo-edit,
+button.todo-save,
+button.todo-del {  
+    padding: 3px 4px;
+    transition: all 350ms ease-in-out;
+}
+button.todo-edit {
+    background-color:transparent;
+    color:var(--secondary);
+}
+button.todo-edit:hover {
+    background-color:var(--secondary);
+    color:white;
+    fill:white;
+}
+
+button.todo-del {
+    background-color: transparent; 
+    color: #AC0000;
+    background-repeat: no-repeat;
+}
+button.todo-del:hover {
+    background-color:#AC0000;
+    color:white;
+}
+button.todo-edit, 
+button.todo-del {
+    margin-top:5px;
+}
+
+button.todo-edit svg,
+button.todo-del svg {
+    width:24px;
+}
+button#todo-add {
+    background-color: white;
+    border: 2px solid #8A0095;
+    color:#8A0095;
+    font-size: 18px;
+    padding: 8px 16px;
+    transition: all 300ms ease-in-out;
+    margin: 0;
+    flex-basis:100%;
+}
+button#todo-add:hover {
+    background-color: rgba(138,0,149,1);
+    color:white;
+}
+button#todo-delall {
+    color: #AC0000;
+    background-color:white;
+    font-size: 18px;;
+    border: 2px solid #AC0000;
+    margin: 1em 0;
+    padding: 8px 16px;
+    float:right;
+}
+button#todo-delall:hover {
+    background-color: #AC0000;
+    color:white;
+}
+@media (min-width:768px) {
+    input.todoinput.text {
+        flex-basis:calc(65% - 6px)
+    }
+    input[type="date"] {
+        flex-basis:calc(35% - 6px);
+    }
+    li[class^="todo"] {
+        padding-bottom:4px;
+    }
+    .todotext {
+        flex: 1 0 50%;
+    }
+    button.todo-edit, button.todo-del {
+        margin-top: 2px;
+    }
+    button[class^="todo-"],
+    .todo-status {
+    flex-basis: 5%;
+}
+}
