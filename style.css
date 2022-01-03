@@ -118,8 +118,12 @@ span.todo--date {
     font-size: 14px;
     color: #888;
 }
+span.todotext.due,
 span.todo--date.due {
     color:#AC0000;
+}
+span.todo--done.due {
+    color:#bbb;
 }
 button, 
 .todo-status {
