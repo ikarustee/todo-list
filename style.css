@@ -110,12 +110,16 @@ li[class^="todo"]:hover {
     width: 100%;
     animation-fill-mode: forwards; 
 }
+.todotext.todo--done > .todo--date {color:#bbb}
 .todotext.edit {
     border: 1px #aaa solid;
 }
 span.todo--date {
     font-size: 14px;
     color: #888;
+}
+span.todo--date.due {
+    color:#AC0000;
 }
 button, 
 .todo-status {
@@ -135,6 +139,7 @@ button[class^="todo-"],
 .todo-status.complete {
     color:var(--completed2);
 }
+
 @keyframes stroke {
     from {width:0}
     to {width:100%}
