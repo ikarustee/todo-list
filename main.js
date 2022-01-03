@@ -27,22 +27,22 @@ let todoArray = [
     { 
         id: "25262", 
         text: "Water the plants", 
-        dueDate: "2021-11-01",
+        dueDate: "2022-01-02",
         todoStatus: false 
     },
     
     { 
         id: "25522", 
-        text: "Feed the cat", 
-        dueDate: "2021-11-21",
+        text: "Feed Tina's cat", 
+        dueDate: "2022-05-21",
         todoStatus: false 
     },
     
     { 
         id: "255622", 
-        text: "Learn javascript", 
-        dueDate:"2021-11-10",
-        todoStatus: false 
+        text: "Bake christmas cookies", 
+        dueDate:"2021-12-01",
+        todoStatus: true 
     }
 ];
 
