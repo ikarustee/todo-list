@@ -86,7 +86,7 @@ li[class^="todo"]:hover {
     border:1px solid transparent;
     border-radius: 4px;
     display:block;
-    margin-top: -6px;
+    margin-top: -8px;
     padding: 4px 2px;
     transition:width 1s ease-in-out;
 }
@@ -110,12 +110,20 @@ li[class^="todo"]:hover {
     width: 100%;
     animation-fill-mode: forwards; 
 }
+.todotext.todo--done > .todo--date {color:#bbb}
 .todotext.edit {
     border: 1px #aaa solid;
 }
 span.todo--date {
     font-size: 14px;
     color: #888;
+}
+span.todotext.due,
+span.todo--date.due {
+    color:#AC0000;
+}
+span.todo--done.due {
+    color:#bbb;
 }
 button, 
 .todo-status {
@@ -135,6 +143,7 @@ button[class^="todo-"],
 .todo-status.complete {
     color:var(--completed2);
 }
+
 @keyframes stroke {
     from {width:0}
     to {width:100%}
