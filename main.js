@@ -94,9 +94,13 @@ function editTODO(todoID){
         const newText = document.querySelector('.todotext.edit').innerText;
         let updatedTodo = todoArray[indexID]
         updatedTodo.text = newText
+        if(updatedTodo.text === '') {
+            alert('The todo is empty!')
+            editMode = index
+        } else {
         todoArray.splice(indexID, 1, updatedTodo)
-        
         editMode = null
+    }
     } else {
         editMode = todoID
     }
