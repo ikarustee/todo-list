@@ -7,8 +7,7 @@ let elstatus;
 const filterInput = document.querySelector('#filterbytext')
 let filteredText = ''
 
-/*+++++++++++++ All events +++++++++++++++++ */
-
+// All events
 form.addEventListener('submit', e => {
     e.preventDefault();
     addTODO(document.getElementById('todo-text').value,  document.getElementById('todo-date').value);
@@ -17,12 +16,8 @@ form.addEventListener('submit', e => {
 
 delAllBtn.addEventListener('click', e => { delTODO(""); }) 
 
-
-
-/*+++++++++++++ Start of Model +++++++++++++++++ */
-
-//sample data
-
+// Model =================
+// Sample data
 let todoArray = [
     { 
         id: "25262", 
@@ -46,13 +41,12 @@ let todoArray = [
     }
 ];
 
-// needed to switch between edit and static mode
+// Switch between edit and static mode
 let editMode = null
 
-// +++++ Local storage function +++++ //
+// Local storage 
 function addToLocalStorage(todoArray) {
     localStorage.setItem('todoArray', JSON.stringify(todoArray))
-    // updateScreen()
 }
 
 function getLocalStorage() {
@@ -64,10 +58,9 @@ function getLocalStorage() {
 }
 getLocalStorage()
 
-/*   //  ++++++++Controller: will manipulate data given by user+++++++++ */
+// Controller: will manipulate data given by user ==========
 function addTODO(userInput, userDate){
-    //Add date and improved ID
-    
+    // Add date and improved ID 
     if(userDate!= "") { 
         todoArray.unshift({ id: Date.now() * Math.floor(Math.random()*1000) + Math.floor(Math.random()*10000).toString(16).substring(1) , dueDate: userDate, text: userInput, todoStatus: false });
     }   else   {todoArray.unshift({ id: Date.now() * Math.floor(Math.random()*1000) + Math.floor(Math.random()*10000).toString(16).substring(1) , dueDate: "", text: userInput, todoStatus: false });}// updateScreen();
@@ -76,7 +69,7 @@ function addTODO(userInput, userDate){
     updateScreen()
 }
 
-// delete todos
+// Delete todos
 function delTODO(todoID) {
     if(todoID == '') {
         if(confirm('Really delete all?')){
@@ -84,23 +77,19 @@ function delTODO(todoID) {
     }
     }
     if (todoID !== "" && todoArray.filter(el => el.id == todoID).length === 0) {
-        alert("Sorry item not found, Try again");//Should we be using a fucnction and call it?   
-        // updateScreen();
+        alert("Sorry item not found, Try again");
         addToLocalStorage(todoArray)
     }
     else {
         todoArray = todoArray.filter(el => el.id != todoID);
-        // updateScreen();
         addToLocalStorage(todoArray)
     }
     updateScreen()
 }
 
-// Edit function
+// Edit todo
 function editTODO(todoID){
-    // console.log('Edit button')
     if(todoID == editMode) {
-        // console.log('no edit mode')
         const indexID = todoArray.findIndex(el => el.id == todoID)     
         const newText = document.querySelector('.todotext.edit').innerText;
         let updatedTodo = todoArray[indexID]
@@ -116,7 +105,6 @@ function editTODO(todoID){
 }
 // Toggle status todo
 function statusTODO(todoID) {
-    // console.log(todoID)
     todoArray.forEach(el => {
         if(el.id == todoID) {
             el.todoStatus = !el.todoStatus
@@ -135,20 +123,17 @@ const filterResults = (event) => {
 }
 filterInput.addEventListener('keyup', filterResults)
 
-/*+++++++++++++ Start of view part++++++++++++++++++ */
+// View ==========
 
-//update page
 function updateScreen() {
     document.querySelector("#todo-text").value = "";
 
-
-    
-    // filter view // show todos by typing a search term into the second input field 
+    // filter view // show todos by typing a keyword into the second input field 
     let todos = todoArray.filter(todo => todo.text.toUpperCase().includes(filteredText.toUpperCase()))
     
-    document.querySelector('#total').innerText = todoArray.length
-    document.querySelector('#match').innerText = todos.length < todoArray.length ? todos.length : 0
-    document.querySelector('#completed').innerText = todoArray.filter(todo => todo.todoStatus).length
+    document.querySelector('#total').innerText = todoArray.length // Shows the total amount of todos in the list
+    document.querySelector('#match').innerText = todos.length < todoArray.length ? todos.length : 0 // Only shows the amount of found matches. Does not filter the view
+    document.querySelector('#completed').innerText = todoArray.filter(todo => todo.todoStatus).length // Listens if a todo is completed or not
     
     ul.innerHTML="";
     todoArray.forEach(el => {
@@ -187,5 +172,5 @@ function updateScreen() {
     });
     }
 }
-
-updateScreen(); // for the first time loading of page
+// Renders the screen on initial / first load of page
+updateScreen(); 
