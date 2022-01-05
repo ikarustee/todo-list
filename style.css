@@ -116,14 +116,20 @@ li[class^="todo"]:hover {
     transition:width 1s ease-in-out;
 }
 .todotext.todo--done {
-   color: #bbb;
-   margin-right: 8px;   
-   transition:width 1s ease-in-out;
+    color: #bbb;
+    margin-right: 8px;
+    padding-top:0;   
+    transition:width 1s ease-in-out;
 }
 .todotext.todo--done::before{
-    border-bottom: 2px solid var(--secondary);
+    content:'';
+    display:block;
     width: 100%;
-    animation-fill-mode: forwards; 
+    height: 2px;
+    position: relative;
+    border-bottom: 2px solid var(--secondary);
+    top: 11px;
+    transition:all 1s ease-in-out; 
 }
 .todotext.todo--done > .todo--date {color:#bbb}
 .todotext.edit {
