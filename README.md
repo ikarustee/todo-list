@@ -1,2 +1,6 @@
 # Todo list
-### Simple todo list with due date function 
+### Simple todo list
+
+Add ons:
+– you can choose a due date</br>
+– todos are stored to the local storage
